@@ -1,9 +1,11 @@
 package study_20231207;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -13,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelRead {
 
 	public static void main(String[] args) {
-		excelFileRead_1();
+		saxExcelRead();
 	}
 	
 	public static void excelFileRead_1() {
@@ -138,6 +140,31 @@ public class ExcelRead {
 		} catch (IllegalStateException e3) {
 			e3.printStackTrace();
 		}
+	}
+	
+	public static void saxExcelRead() {
+
+		try {
+			String filePath = "C:\\이상원\\농금\\통합\\적재\\test.xlsx";
+			File file = new File(filePath);
+
+			ExcelSheetHandler excelSheetHandler = ExcelSheetHandler.readExcel(file);
+
+			// excelDatas >>> [[nero@nate.com, Seoul], [jijeon@gmail.com, Busan], [jy.jeon@naver.com, Jeju]]
+			ArrayList<ArrayList<String>> excelDatas = excelSheetHandler.getRows();
+			
+			System.out.println(excelDatas);
+			
+			/*
+			for(ArrayList<String> dataRow : excelDatas) // row 하나를 읽어온다.
+			    for(String str : dataRow){ // cell 하나를 읽어온다.
+			        System.out.println(str);
+			    }*/
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
